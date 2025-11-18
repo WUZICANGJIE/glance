@@ -1,0 +1,266 @@
+- name: Home
+  desktop-navigation-width: wide
+  center-vertically: true
+  show-mobile-header: true
+  width: default
+
+  head-widgets:
+    - type: search
+      autofocus: true
+      search-engine: google
+      placeholder: "Ciallo ～(∠・ω< )⌒★!"
+      bangs:
+        - title: Amazon Japan
+          shortcut: "!amazon"
+          url: https://www.amazon.co.jp/s?k={QUERY}
+        - title: ArchWiki
+          shortcut: "!arch"
+          url: https://wiki.archlinux.org/index.php?search={QUERY}
+        - title: Baidu
+          shortcut: "!baidu"
+          url: https://www.baidu.com/s?wd={QUERY}
+        - title: Bangumi
+          shortcut: "!bangumi"
+          url: https://bangumi.tv/subject_search/{QUERY}
+        - title: Bilibili
+          shortcut: "!bili"
+          url: https://search.bilibili.com/all?keyword={QUERY}
+        - title: Bilibili Live
+          shortcut: "!blive"
+          url: https://search.bilibili.com/live?keyword={QUERY}
+        - title: Bookmarks
+          shortcut: "!b"
+          url: https://keep.wuzicangjie.com/dashboard/search?q={QUERY}
+        - title: Cheat.sh
+          shortcut: "!sh"
+          url: https://cheat.sh/{QUERY}
+        - title: eBay
+          shortcut: "!ebay"
+          url: https://www.ebay.com/sch/i.html?_nkw={QUERY}
+        - title: GitHub
+          shortcut: "!github"
+          url: https://github.com/search?q={QUERY}
+        - title: Google Map
+          shortcut: "!map"
+          url: https://www.google.com/maps/search/{QUERY}
+        - title: Google Scholar
+          shortcut: "!scholar"
+          url: https://scholar.google.com/scholar?q={QUERY}
+        - title: Kakaku.com
+          shortcut: "!kakaku"
+          url: https://kakaku.com/search_results/{QUERY}/
+        - title: Reddit
+          shortcut: "!r"
+          url: https://www.reddit.com/search?q={QUERY}
+        - title: X
+          shortcut: "!x"
+          url: https://x.com/search?q={QUERY}
+        - title: YouTube
+          shortcut: "!y"
+          url: https://www.youtube.com/results?search_query={QUERY}
+
+  columns:
+    - size: small
+      widgets:
+        - type: clock
+          hour-format: 24h
+          timezones:
+            - timezone: Asia/Tokyo
+              label: Tokyo
+            - timezone: Asia/Shanghai
+              label: Beijing
+            - timezone: Europe/Amsterdam
+              label: Amsterdam
+            - timezone: America/New_York
+              label: New York
+
+        - type: weather
+          location: Amstelveen, The Netherlands # Tokyo, Japan
+          units: metric
+          hour-format: 24h
+
+    - size: full
+      widgets:
+        - type: custom-api
+          title: Upcoming Events
+          cache: 15m
+          template: |
+            {{
+              $token := newRequest "https://oauth2.googleapis.com/token"
+                | withHeader "Content-Type" "application/x-www-form-urlencoded"
+                | withStringBody "client_id=${GOOGLE_CLIENT_ID}&client_secret=${GOOGLE_CLIENT_SECRET}&refresh_token=${GOOGLE_REFRESH_TOKEN}&grant_type=refresh_token"
+                | getResponse
+            }}
+        
+            {{ if ne $token.Response.StatusCode 200 }}
+              <p>Failed to get token: {{ $token.Response.Status }}</p>
+            {{ else }}
+              {{ $accessToken := $token.JSON.String "access_token" }}
+              {{ $nowtime := now | formatTime "rfc3339" }}
+              {{ $future := offsetNow "720h" | formatTime "rfc3339" }}
+              {{
+                $events := newRequest "https://www.googleapis.com/calendar/v3/calendars/primary/events"
+                  | withParameter "timeMin" $nowtime
+                  | withParameter "timeMax" $future
+                  | withParameter "singleEvents" "true"
+                  | withParameter "orderBy" "startTime"
+                  | withParameter "maxResults" "5"
+                  | withHeader "Authorization" (print "Bearer " $accessToken)
+                  | getResponse
+              }}
+        
+              {{ if ne $events.Response.StatusCode 200 }}
+                <p>Failed to fetch events: {{ $events.Response.Status }}</p>
+              {{ else }}
+                <style>
+                  .gcal-list { display: flex; flex-direction: column; gap: 6px; }
+                  .gcal-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+                  .gcal-item .size-h4 { margin: 0 !important; line-height: 1.25; }
+                  .gcal-title { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+                  .gcal-time { flex: 0 0 auto; white-space: nowrap; }
+                  .gcal-eta { flex: 0 0 auto; margin-left: auto; white-space: nowrap; text-align: right; }
+                  @media (max-width: 600px) {
+                    .gcal-item {
+                      display: grid;
+                      grid-template-columns: 1fr auto;
+                      grid-template-areas:
+                        "title title"
+                        "time eta";
+                      row-gap: 2px;
+                      column-gap: 8px;
+                      align-items: center;
+                      padding: 4px 0;
+                    }
+                    .gcal-title {
+                      grid-area: title;
+                      white-space: nowrap;
+                    }
+                    .gcal-time {
+                      grid-area: time;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    }
+                    .gcal-eta {
+                      grid-area: eta;
+                      white-space: nowrap;
+                      margin-left: 0;
+                      text-align: right;
+                      opacity: 0.85;
+                    }
+                  }
+                </style>
+                <div class="gcal-list">
+                  {{ range $events.JSON.Array "items" }}
+                  {{ $start := .String "start.dateTime" }}
+                  {{ $end := .String "end.dateTime" }}
+                  {{ $isAllDay := eq $start "" }}
+                  {{ if $isAllDay }}
+                    {{ $start = print (.String "start.date") | parseLocalTime "DateOnly" }}
+                    {{ $end = print (.String "end.date") | parseLocalTime "DateOnly" }}
+                  {{ else }}
+                    {{ $start = $start | parseTime "rfc3339" }}
+                    {{ $end = $end | parseTime "rfc3339" }}            
+                  {{ end }}
+                  {{ $startDateOnly := $start | formatTime "DateOnly" }}
+                  {{ $endDateOnly := $end | formatTime "DateOnly" }}
+                  {{ $isStartAndEndDateSame := eq $startDateOnly $endDateOnly }}
+        
+                  <div class="gcal-item">
+                    <a href="https://calendar.google.com/calendar/u/0" target="_blank" class="size-h4 color-highlight gcal-title">
+                      {{ .String "summary" }}
+                    </a>
+                    <a href="https://calendar.google.com/calendar/u/0" target="_blank" class="size-h4 gcal-time">
+                      {{ if $isAllDay }}
+                        {{ $start | formatTime "Jan 2" }} · All day
+                      {{ else }}
+                        {{ $start | formatTime "Jan 2 · 15:04" }} 
+                        {{ if $isStartAndEndDateSame }}
+                            - {{ $end | formatTime "15:04" }}
+                          {{ else }}
+                            - {{ $end | formatTime "Jan 2 · 15:04" }}
+                        {{ end }}
+                      {{ end }}
+                    </a>
+                    <div class="color-primary size-h4 gcal-eta" {{ $start | toRelativeTime }}></div>
+                  </div>
+                {{ end }}
+                </div>
+              {{ end }}
+            {{ end }}
+            
+        - type: bookmarks
+          define: &shared-bookmark-properties
+            hide-arrow: true
+            same-tab: true
+          groups:
+            - title: General
+              same-tab: true
+              <<: *shared-bookmark-properties
+              links:
+                - title: GitHub
+                  url: https://github.com/
+                - title: monkeytype
+                  url: https://monkeytype.com/
+            - title: Entertainment
+              <<: *shared-bookmark-properties
+              links:
+                - title: YouTube
+                  url: https://www.youtube.com/
+                - title: Netflix
+                  url: https://www.netflix.com/
+                - title: Bilibili
+                  url: https://www.bilibili.com/
+                - title: Sonos
+                  url: https://play.sonos.com/
+            - title: Social
+              <<: *shared-bookmark-properties
+              links:
+                - title: Reddit
+                  url: https://www.reddit.com/
+                - title: X
+                  url: https://x.com/
+                - title: Chiphell
+                  url: https://www.chiphell.com/
+                - title: V2EX
+                  url: https://v2ex.com/
+            - title: School
+              <<: *shared-bookmark-properties
+              links:
+                - title: Waseda Moodle
+                  url: https://wsdmoodle.waseda.jp/
+                - title: My Waseda
+                  url: https://my.waseda.jp/
+                - title: VU Canvas
+                  url: https://canvas.vu.nl/
+                - title: VU Dashboard
+                  url: https://vu.nl/en/dashboard
+            - title: Shopping
+              <<: *shared-bookmark-properties
+              links:
+                - title: Amazon Japan
+                  url: https://www.amazon.co.jp/
+                - title: AliExpress
+                  url: https://ja.aliexpress.com/
+                - title: eBay
+                  url: https://www.ebay.com/
+                - title: Uber Eats
+                  url: https://www.ubereats.com/
+            - title: AI
+              <<: *shared-bookmark-properties
+              links:
+                - title: Gemini
+                  url: https://gemini.google.com/app
+                - title: NotebookLM
+                  url: https://notebooklm.google.com/
+                - title: Manus
+                  url: https://manus.im/app
+                - title: Ollama
+                  url: https://ollama.com/library/
+                - title: CIVITAI
+                  url: https://civitai.com/models
+                - title: Hugging Face
+                  url: https://huggingface.co/
+                - title: LMArena
+                  url: https://lmarena.ai/leaderboard
+

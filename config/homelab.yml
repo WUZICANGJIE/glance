@@ -1,0 +1,456 @@
+- name: Homelab
+  desktop-navigation-width: wide
+  show-mobile-header: true
+  width: wide
+
+  columns:
+    - size: small
+      widgets:
+        - type: server-stats
+          servers:
+            - type: local
+              name: My Home Server
+              hide-swap: true
+              hide-mountpoints-by-default: true
+              mountpoints:
+                "/mnt/array/":
+                  name: Array
+                  hide: false
+
+        - type: bookmarks
+          groups:
+            - title: Server Management
+              hide-arrow: true
+              links:
+                - title: Synology DSM
+                  url: https://wuzicangjie.quickconnect.to/
+                - title: UNRAID CONNECT
+                  url: https://connect.myunraid.net/
+                - title: Tailscale Admin Console
+                  url: https://login.tailscale.com/admin/machines
+                - title: Cloudflare One
+                  url: https://one.dash.cloudflare.com/
+            - title: Local Access
+              hide-arrow: true
+              links:
+                - title: Archer BE9300
+                  url: http://192.168.0.3/
+                - title: Aterm
+                  url: http://192.168.0.1/
+                - title: UNRAID WebUI
+                  url: http://192.168.0.21/      
+
+        # - type: custom-api
+        #   title: Tailscale Devices
+        #   title-url: https://login.tailscale.com/admin/machines
+        #   url: https://api.tailscale.com/api/v2/tailnet/-/devices
+        #   headers:
+        #     Authorization: Bearer ${TAILSCALE_API_KEY}
+        #   cache: 10m
+        #   template: |
+        #     {{/* User Variables */}}
+        #     {{/* Set to true if you'd like an indicator for online devices */}}
+        #     {{ $enableOnlineIndicator := false }}
+        
+        #     <style>
+        #       .device-info-container {
+        #         position: relative;
+        #         overflow: hidden;
+        #         height: 1.5em;
+        #       }
+        
+        #       .device-info {
+        #         display: flex;
+        #         transition: transform 0.2s ease, opacity 0.2s ease;
+        #       }
+        
+        #       .device-ip {
+        #         position: absolute;
+        #         top: 0;
+        #         left: 0;
+        #         transform: translateY(-100%);
+        #         opacity: 0;
+        #         transition: transform 0.2s ease, opacity 0.2s ease;
+        #       }
+        
+        #       .device-info-container:hover .device-info {
+        #         transform: translateY(100%);
+        #         opacity: 0;
+        #       }
+        
+        #       .device-info-container:hover .device-ip {
+        #         transform: translateY(0);
+        #         opacity: 1;
+        #       }
+        
+        #       .update-indicator {
+        #         width: 8px;
+        #         height: 8px;
+        #         border-radius: 50%;
+        #         background-color: var(--color-primary);
+        #         display: inline-block;
+        #         margin-left: 4px;
+        #         vertical-align: middle;
+        #       }
+        
+        #       .offline-indicator {
+        #         width: 8px;
+        #         height: 8px;
+        #         border-radius: 50%;
+        #         background-color: var(--color-negative);
+        #         display: inline-block;
+        #         margin-left: 4px;
+        #         vertical-align: middle;
+        #       }
+        
+        #       .online-indicator {
+        #         width: 8px;
+        #         height: 8px;
+        #         border-radius: 50%;
+        #         background-color: var(--color-positive);
+        #         display: inline-block;
+        #         margin-left: 4px;
+        #         vertical-align: middle;
+        #       }
+        
+        #       .device-name-container {
+        #         display: flex;
+        #         align-items: center;
+        #         gap: 8px;
+        #       }
+        
+        #       .indicators-container {
+        #         display: flex;
+        #         align-items: center;
+        #         gap: 4px;
+        #       }
+        #     </style>
+        #     <ul class="list list-gap-10 collapsible-container" data-collapse-after="4">
+        #       {{ range .JSON.Array "devices" }}
+        #       <li>
+        #         <div class="flex items-center gap-10">
+        #           <div class="device-name-container grow">
+        #             <span class="size-h4 block text-truncate color-primary">
+        #               {{ findMatch "^([^.]+)" (.String "name") }}
+        #             </span>
+        #             <div class="indicators-container">
+        #               {{ if (.Bool "updateAvailable") }}
+        #               <span class="update-indicator" data-popover-type="text" data-popover-text="Update Available"></span>
+        #               {{ end }}
+        
+        #               {{ $lastSeen := .String "lastSeen" | parseTime "rfc3339" }}
+        #               {{ if not ($lastSeen.After (offsetNow "-10s")) }}
+        #               {{ $lastSeenTimezoned := $lastSeen.In now.Location }}
+        #               <span class="offline-indicator" data-popover-type="text"
+        #                 data-popover-text="Offline - Last seen {{ $lastSeenTimezoned.Format " Jan 2 3:04pm" }}"></span>
+        #               {{ else if $enableOnlineIndicator }}
+        #                 <span class="online-indicator" data-popover-type="text" data-popover-text="Online"></span>
+        #               {{ end }}
+        #             </div>
+        #           </div>
+        #         </div>
+        #         <div class="device-info-container">
+        #           <ul class="list-horizontal-text device-info">
+        #             <li>{{ .String "os" }}</li>
+        #             <li>{{ .String "user" }}</li>
+        #           </ul>
+        #           <div class="device-ip">
+        #             {{ .String "addresses.0"}}
+        #           </div>
+        #         </div>
+        #       </li>
+        #       {{ end }}
+        #     </ul>
+
+    - size: full
+      widgets:
+        - type: docker-containers
+          title: Internet Access
+          category: internet-access
+          define: &all-containers
+          # Internet Access Containers
+            define: &shared-container-properties
+              same-tab: true
+            archivebox:
+              <<: *shared-container-properties
+              name: Archivebox
+              url: https://archivebox.wuzicangjie.com/
+              icon: /assets/icons/archivebox.svg
+              category: internet-access
+            AutoBangumi:
+              <<: *shared-container-properties
+              name: AutoBangumi
+              url: https://autobangumi.wuzicangjie.com/
+              icon: /assets/icons/autobangumi.svg
+              category: internet-access
+            bazarr:
+              <<: *shared-container-properties
+              name: Bazarr
+              url: https://bazarr.wuzicangjie.com/
+              icon: /assets/icons/bazarr.svg
+              category: internet-access
+            binhex-overseerr:
+              <<: *shared-container-properties
+              name: Overseerr
+              url: https://overseerr.wuzicangjie.com/
+              icon: /assets/icons/overseerr.svg
+              category: internet-access
+            binhex-prowlarr:
+              <<: *shared-container-properties
+              name: Prowlarr
+              url: https://prowlarr.wuzicangjie.com/
+              icon: /assets/icons/prowlarr.svg
+              category: internet-access
+            binhex-qbittorrentvpn:
+              <<: *shared-container-properties
+              name: qBittorrent
+              url: https://qbittorrent.wuzicangjie.com/
+              icon: /assets/icons/qbittorrent.svg
+              category: internet-access
+            binhex-radarr:
+              <<: *shared-container-properties
+              name: Radarr
+              url: https://radarr.wuzicangjie.com/
+              icon: /assets/icons/radarr.svg
+              category: internet-access
+            binhex-sonarr:
+              <<: *shared-container-properties
+              name: Sonarr
+              url: https://sonarr.wuzicangjie.com/
+              icon: /assets/icons/sonarr.svg
+              category: internet-access
+            browserless-v2:
+              <<: *shared-container-properties
+              name: Browserless
+              url: http://192.168.0.21:3012/
+              icon: /assets/icons/browserless.svg
+              category: internet-access
+              parent: Karakeep
+            ConvertX:
+              <<: *shared-container-properties
+              name: ConvertX
+              url: https://convert.wuzicangjie.com/
+              icon: /assets/icons/convertx.svg
+              category: internet-access
+            FileBrowser-PNP:
+              <<: *shared-container-properties
+              name: FileBrowser
+              url: https://files.wuzicangjie.com/
+              icon: /assets/icons/filebrowser.svg
+              category: internet-access
+            freshrss:
+              <<: *shared-container-properties
+              name: FreshRSS
+              url: https://freshrss.wuzicangjie.com/
+              icon: /assets/icons/freshrss.svg
+              category: internet-access
+            Ghostfolio:
+              <<: *shared-container-properties
+              name: Ghostfolio
+              url: https://ghostfolio.wuzicangjie.com/
+              icon: /assets/icons/ghostfolio.svg
+              category: internet-access
+              id: Ghostfolio
+            ghostfolio-postgresql17:
+              <<: *shared-container-properties
+              name: PostgreSQL (Ghostfolio)
+              icon: /assets/icons/postgresql.svg
+              category: internet-access
+              parent: Ghostfolio
+            ghostfolio-redis:
+              <<: *shared-container-properties
+              name: Redis (Ghostfolio)
+              icon: /assets/icons/redis.svg
+              category: internet-access
+              parent: Ghostfolio
+            karakeep:
+              <<: *shared-container-properties
+              name: Karakeep
+              url: https://keep.wuzicangjie.com/
+              icon: /assets/icons/karakeep.svg
+              category: internet-access
+              id: Karakeep
+            Komga:
+              <<: *shared-container-properties
+              name: Komga
+              url: https://komga.wuzicangjie.com/
+              icon: /assets/icons/komga.svg
+              category: internet-access
+            lobe-chat:
+              <<: *shared-container-properties
+              name: Lobe Chat
+              url: https://chat.wuzicangjie.com/
+              icon: /assets/icons/lobe-chat.svg
+              category: internet-access
+            meilisearch:
+              <<: *shared-container-properties
+              name: Meilisearch
+              icon: /assets/icons/meilisearch.svg
+              category: internet-access
+              parent: Karakeep
+            memos:
+              <<: *shared-container-properties
+              name: Memos
+              url: https://memos.wuzicangjie.com/
+              icon: /assets/icons/memos.svg
+              category: internet-access
+            open-webui:
+              <<: *shared-container-properties
+              name: Open WebUI
+              url: https://openwebui.wuzicangjie.com/
+              icon: /assets/icons/open-webui.svg
+              category: internet-access
+            picoshare:
+              <<: *shared-container-properties
+              name: PicoShare
+              url: https://share.wuzicangjie.com/
+              icon: /assets/icons/picoshare.svg
+              category: internet-access
+            Plex-Media-Server:
+              <<: *shared-container-properties
+              name: Plex
+              url: https://app.plex.tv/
+              icon: /assets/icons/plex.svg
+              category: internet-access
+            PortainerCE:
+              <<: *shared-container-properties
+              name: Portainer
+              url: https://portainer.wuzicangjie.com/
+              icon: /assets/icons/portainer.svg
+              category: internet-access
+            SearXNG:
+              <<: *shared-container-properties
+              name: SearXNG
+              url: https://search.wuzicangjie.com/
+              icon: /assets/icons/searxng.svg
+              category: internet-access
+            UptimeKuma:
+              <<: *shared-container-properties
+              name: Uptime Kuma
+              url: https://uptime.wuzicangjie.com/
+              icon: /assets/icons/uptime-kuma.svg
+              category: internet-access
+
+            # Local Access Containers
+            Dozzle:
+              <<: *shared-container-properties
+              name: Dozzle
+              url: http://192.168.0.21:20002/
+              icon: /assets/icons/dozzle.svg
+              category: local-access
+            FileBot:
+              <<: *shared-container-properties
+              name: FileBot
+              url: http://192.168.0.21:7813/
+              icon: /assets/icons/filebot.svg
+              category: local-access
+            Firefox:
+              <<: *shared-container-properties
+              name: Firefox
+              url: http://192.168.0.21:3001/
+              icon: /assets/icons/firefox.svg
+              category: local-access
+            fivefilters-full-text-rss:
+              <<: *shared-container-properties
+              name: Full-Text RSS
+              url: http://192.168.0.21:50000/
+              icon: /assets/icons/rss.svg
+              category: local-access
+            MeTube:
+              <<: *shared-container-properties
+              name: MeTube
+              url: http://192.168.0.21:18081/
+              icon: /assets/icons/metube.svg
+              category: local-access
+            ollama:
+              <<: *shared-container-properties
+              name: Ollama
+              url: http://192.168.0.21:11434/
+              icon: /assets/icons/ollama.svg
+              category: local-access
+            QDirStat:
+              <<: *shared-container-properties
+              name: QDirStat
+              url: http://192.168.0.21:7815/
+              icon: /assets/icons/qdirstat.svg
+              category: local-access
+            RSSHub:
+              <<: *shared-container-properties
+              name: RSSHub
+              url: http://192.168.0.21:1200/
+              icon: /assets/icons/rsshub.svg
+              category: local-access
+
+            # No WebUI Containers
+            binhex-flaresolverr:
+              <<: *shared-container-properties
+              name: FlareSolverr
+              icon: /assets/icons/flaresolverr.svg
+              category: no-webui
+            CloudflaredTunnel:
+              <<: *shared-container-properties
+              name: Cloudflare Tunnel
+              icon: /assets/icons/cloudflare.svg
+              category: no-webui
+            Doge-Node:
+              <<: *shared-container-properties
+              name: Doge Node
+              icon: /assets/icons/doge.svg
+              category: no-webui
+            Lancache:
+              <<: *shared-container-properties
+              name: LanCache
+              icon: /assets/icons/lancache.svg
+              category: no-webui
+          
+          containers: *all-containers
+
+        - type: docker-containers
+          title: Local Access
+          category: local-access
+          containers: *all-containers
+
+        - type: split-column
+          widgets:
+            - type: group
+              widgets:
+              - type: docker-containers
+                title: No WebUI
+                category: no-webui
+                containers: *all-containers
+              - type: monitor
+                cache: 1m
+                title: Services
+                sites:
+                  - title: RStudio
+                    url: https://rstudio.wuzicangjie.com/
+                    icon: /assets/icons/rstudio.svg
+                  - title: Unbalanced
+                    url: http://192.168.0.21:7090
+                    icon: /assets/icons/unbalanced.svg
+
+            - type: group
+              define: &shared-reddit-properties
+                type: reddit
+                sort-by: top
+                show-flairs: true
+                top-period: week
+                show-thumbnails: true
+                collapse-after: 2
+                limit: 10
+              widgets:
+                - subreddit: selfhosted
+                  <<: *shared-reddit-properties
+                - subreddit: homelab
+                  <<: *shared-reddit-properties
+                - subreddit: unRAID
+                  <<: *shared-reddit-properties 
+
+
+
+
+
+
+
+
+

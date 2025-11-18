@@ -1,0 +1,12 @@
+- name: Portainer
+  desktop-navigation-width: wide
+  show-mobile-header: false
+  width: wide
+
+  columns:
+    - size: full
+      widgets:
+        - type: iframe
+          hide-header: true
+          source: https://portainer.wuzicangjie.com/
+          # height: 1080

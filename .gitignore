@@ -1,0 +1,2 @@
+# Ignore local env file for VPS
+.env

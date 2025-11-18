@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  glance:
+    image: glanceapp/glance
+    container_name: Glance
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:8080:8080"
+
+    environment:
+      TZ: Asia/Tokyo
+      HOST_OS: Ubuntu
+      HOST_HOSTNAME: vps-wuzi
+      HOST_CONTAINERNAME: Glance
+
+      GHOSTFOLIO_URL: ${GHOSTFOLIO_URL}
+      GHOSTFOLIO_PUBLIC_URL: ${GHOSTFOLIO_PUBLIC_URL}
+
+      TAILSCALE_API_KEY: ${TAILSCALE_API_KEY}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_REFRESH_TOKEN: ${GOOGLE_REFRESH_TOKEN}
+
+      CA_TS_FALLBACK_DIR: /app/config/
+
+      GLANCE_SECRET_KEY: ${GLANCE_SECRET_KEY}
+      GLANCE_ADMIN_PASSWORD: ${GLANCE_ADMIN_PASSWORD}
+      GLANCE_WUZI_PASSWORD: ${GLANCE_WUZI_PASSWORD}
+      GLANCE_GUEST_PASSWORD: ${GLANCE_GUEST_PASSWORD}
+
+    volumes:
+      - ./config:/app/config:rw
+      - ./assets:/app/assets:rw
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - /dev/sda:/mnt/array:ro

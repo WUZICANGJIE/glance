@@ -1,0 +1,219 @@
+- name: Markets
+  desktop-navigation-width: wide
+  show-mobile-header: true
+  width: wide
+
+  columns:
+    - size: small
+      widgets:
+        - type: markets
+          title: Indices
+          markets:
+            - symbol: ^SPX
+              name: S&P 500
+              symbol-link: https://www.tradingview.com/symbols/SPX/
+              chart-link: https://www.tradingview.com/chart/?symbol=SPX
+            - symbol: ^IXIC
+              name: NASDAQ Composite
+              symbol-link: https://www.tradingview.com/symbols/NDX/
+              chart-link: https://www.tradingview.com/chart/?symbol=NDX
+            - symbol: ^N225
+              name: Nikkei 225
+              symbol-link: https://www.tradingview.com/symbols/NI225/
+              chart-link: https://www.tradingview.com/chart/?symbol=NI225
+            - symbol: 000001.SS
+              name: SSE Composite
+              symbol-link: https://www.tradingview.com/symbols/000001/
+              chart-link: https://www.tradingview.com/chart/?symbol=000001
+            - symbol: ^TNX
+              name: 10-Year Yield
+              symbol-link: https://www.tradingview.com/symbols/US10Y/
+              chart-link: https://www.tradingview.com/chart/?symbol=US10Y
+            - symbol: ^VIX
+              name: VIX Index
+              symbol-link: https://www.tradingview.com/symbols/VIX/
+              chart-link: https://www.tradingview.com/chart/?symbol=VIX
+        - type: markets
+          title: Crypto
+          markets:
+            - symbol: BTC-USD
+              name: Bitcoin
+              symbol-link: https://www.tradingview.com/symbols/BTCUSD/
+              chart-link: https://www.tradingview.com/chart/?symbol=BTCUSD
+            - symbol: ETH-USD
+              name: Ethereum
+              symbol-link: https://www.tradingview.com/symbols/ETHUSD/
+              chart-link: https://www.tradingview.com/chart/?symbol=ETHUSD
+        - type: markets
+          title: Forex
+          markets:
+            - symbol: DX-Y.NYB
+              name: Dollar Index
+              symbol-link: https://www.tradingview.com/symbols/DXY/
+              chart-link: https://www.tradingview.com/chart/?symbol=DXY
+            - symbol: JPY=X
+              name: USD/JPY
+              symbol-link: https://www.tradingview.com/symbols/USDJPY/
+              chart-link: https://www.tradingview.com/chart/?symbol=USDJPY
+            - symbol: CNY=X
+              name: USD/CNY
+              symbol-link: https://www.tradingview.com/symbols/USDCNY/
+              chart-link: https://www.tradingview.com/chart/?symbol=USDCNY
+            - symbol: EURUSD=X
+              name: EUR/USD
+              symbol-link: https://www.tradingview.com/symbols/EURUSD/
+              chart-link: https://www.tradingview.com/chart/?symbol=EURUSD
+
+        - type: markets
+          title: Commodities
+          markets: 
+            - symbol: GC=F
+              name: Gold
+              symbol-link: https://www.tradingview.com/symbols/GOLD/
+              chart-link: https://www.tradingview.com/chart/?symbol=GOLD
+            - symbol: CL=F
+              name: Crude Oil
+              symbol-link: https://www.tradingview.com/symbols/USOIL/
+              chart-link: https://www.tradingview.com/chart/?symbol=USOIL
+
+    - size: full
+      widgets:
+        - type: custom-api
+          title: Ghostfolio
+          title-url: ${GHOSTFOLIO_URL}
+          cache: 5m
+          url: ${GHOSTFOLIO_PUBLIC_URL}
+          # Replace with the URL of your Ghostfolio instance and your public access ID (My Ghostfolio/Access/Add new)
+          # Example: https://your-ghostfolio-instance.com/api/v1/public/YOUR-PUBLIC-ID/portfolio
+          template: |
+            {{ if eq .Response.StatusCode 200 }}
+              <div style="display: flex; justify-content: space-between;">
+                <!-- Sección TODAY -->
+                <div style="flex: 1; text-align: center;">
+                  <p>TODAY</p>
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <p class="{{ if gt (.JSON.Float "performance.1d.relativeChange") 0.0 }}color-positive{{ else }}color-negative{{ end }}">
+                      {{ mul (.JSON.Float "performance.1d.relativeChange") 100 | printf "%.2f" }}%
+                      {{ if gt (.JSON.Float "performance.1d.relativeChange") 0.0 }}↑{{ else }}↓{{ end }}
+                    </p>
+                  </div>
+                </div>
+                <!-- Sección YEAR -->
+                <div style="flex: 1; text-align: center;">
+                  <p>YEAR</p>
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <p class="{{ if gt (.JSON.Float "performance.ytd.relativeChange") 0.0 }}color-positive{{ else }}color-negative{{ end }}">
+                      {{ mul (.JSON.Float "performance.ytd.relativeChange") 100 | printf "%.2f" }}%
+                      {{ if gt (.JSON.Float "performance.ytd.relativeChange") 0.0 }}↑{{ else }}↓{{ end }}
+                    </p>
+                  </div>
+                </div>
+                <!-- Sección TOTAL -->
+                <div style="flex: 1; text-align: center;">
+                  <p>TOTAL</p>
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <p class="{{ if gt (.JSON.Float "performance.max.relativeChange") 0.0 }}color-positive{{ else }}color-negative{{ end }}">
+                      {{ mul (.JSON.Float "performance.max.relativeChange") 100 | printf "%.2f" }}%
+                      {{ if gt (.JSON.Float "performance.max.relativeChange") 0.0 }}↑{{ else }}↓{{ end }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {{ else }}
+              <div style="text-align: center; color: red;">
+                Error connecting to Ghostfolio: {{ .Response.StatusCode }}
+              </div>
+            {{ end }}
+            
+        - type: bookmarks
+          define: &shared-bookmark-properties
+            hide-arrow: true
+            same-tab: true
+          groups:
+            - title: Stocks & Economy
+              <<: *shared-bookmark-properties
+              links:
+                - title: TradingView
+                  url: https://www.tradingview.com/chart/
+                - title: Economic Calendar
+                  url: https://tradingeconomics.com/calendar
+                - title: CME FedWatch
+                  url: https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html
+            - title: Crypto
+              <<: *shared-bookmark-properties
+              links:
+                - title: CoinMarketCap
+                  url: https://coinmarketcap.com/
+                - title: DefiLlama
+                  url: https://defillama.com/
+                - title: DEX SCREENER
+                  url: https://dexscreener.com/
+                - title: Ploymarket
+                  url: https://www.ploymarket.com/
+            - title: Trading
+              <<: *shared-bookmark-properties
+              links:
+                - title: SBI Securities
+                  url: https://www.sbisec.co.jp/
+                - title: GMO Coin
+                  url: https://coin.z.com/jp/
+            - title: News
+              <<: *shared-bookmark-properties
+              links:
+                - title: Bloomberg
+                  url: https://www.bloomberg.co.jp/
+                - title: Reuters
+                  url: https://jp.reuters.com/
+                - title: TechFlow
+                  url: https://www.techflowpost.com/
+            - title: Blog
+              <<: *shared-bookmark-properties
+              links:
+                - title: Shen
+                  url: https://www.shenmacro.com/
+                - title: Physixfan
+                  url: https://www.physixfan.com/
+            - title: Tools
+              <<: *shared-bookmark-properties
+              links:
+                - title: Portfolio Visualizer
+                  url: https://www.portfoliovisualizer.com/
+            - title: Community
+              <<: *shared-bookmark-properties
+              links:
+                - title: Rational Reminder
+                  url: https://community.rationalreminder.ca/
+
+        - type: videos
+          style: horizontal-cards
+          limit: 20
+          channels:
+            - UCkHrq03gWLLx6vjS2DOJ8aA # 孙富贵
+            - UCRBrH2qS7yKGMNSmjnj8gcw # 投资TALK君
+            - UCRvqjQPSeaWn-uEx-w0XOIg # Benjamin Cowen
+            - UCilwQlk62k1z7aUEZPOB6yw # 小Lin说
+            - UCDXTQ8nWmx_EhZ2v-kp7QxA # Ben Felix
+            - UCeTLfPD7thTMabtL7w87Aug # 清流君
+
+        - type: group
+          define: &shared-reddit-properties
+            type: reddit
+            sort-by: top
+            show-flairs: true
+            top-period: week
+            show-thumbnails: true
+            collapse-after: 5
+            limit: 10
+          widgets:
+            - subreddit: CryptoCurrency
+              <<: *shared-reddit-properties
+            - subreddit: LETFs
+              <<: *shared-reddit-properties
+            - subreddit: wallstreetbets
+              <<: *shared-reddit-properties
+            - subreddit: algotrading
+              <<: *shared-reddit-properties
+          
+
+
+
