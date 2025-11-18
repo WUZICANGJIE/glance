@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   glance:
     image: glanceapp/glance
