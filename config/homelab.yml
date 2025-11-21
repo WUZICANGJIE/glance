@@ -13,8 +13,8 @@
               hide-swap: true
               hide-mountpoints-by-default: true
               mountpoints:
-                "/mnt/array/":
-                  name: Array
+                "/mnt/root/":
+                  name: Root
                   hide: false
 
         - type: bookmarks
@@ -26,12 +26,12 @@
                   url: https://wuzicangjie.quickconnect.to/
                 - title: UNRAID CONNECT
                   url: https://connect.myunraid.net/
+                - title: Linode Cloud Manager
+                  url: https://cloud.linode.com/
                 - title: Tailscale Admin Console
                   url: https://login.tailscale.com/admin/machines
                 - title: Cloudflare One
                   url: https://one.dash.cloudflare.com/
-                - title: Linode Cloud Manager
-                  url: https://cloud.linode.com/
             - title: Local Access
               hide-arrow: true
               links:
