@@ -113,8 +113,8 @@
                 <p>Failed to fetch events: {{ $events.Response.Status }}</p>
               {{ else }}
                 <style>
-                  .gcal-list { display: flex; flex-direction: column; gap: 6px; }
-                  .gcal-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+                  .gcal-list { display: flex; flex-direction: column; gap: 4px; }
+                  .gcal-item { display: flex; align-items: center; gap: 8px; padding: 3px 0; }
                   .gcal-item .size-h4 { margin: 0 !important; line-height: 1.25; }
                   .gcal-title { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
                   .gcal-time { flex: 0 0 auto; white-space: nowrap; }
@@ -129,7 +129,7 @@
                       row-gap: 2px;
                       column-gap: 8px;
                       align-items: center;
-                      padding: 4px 0;
+                      padding: 3px 0;
                     }
                     .gcal-title {
                       grid-area: title;
