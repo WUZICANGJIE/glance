@@ -153,6 +153,8 @@
             - title: Trading
               <<: *shared-bookmark-properties
               links:
+                - title: Interactive Brokers
+                  url: https://www.interactivebrokers.ie/portal/
                 - title: SBI Securities
                   url: https://www.sbisec.co.jp/
                 - title: GMO Coin
