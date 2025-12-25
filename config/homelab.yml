@@ -2,7 +2,7 @@
   desktop-navigation-width: wide
   show-mobile-header: true
   width: wide
-  
+
   columns:
     - size: small
       widgets:
@@ -61,24 +61,6 @@
             - title: Bazarr
               url: https://bazarr.wuzicangjie.com/
               icon: /assets/icons/bazarr.svg
-            - title: Overseerr
-              url: https://overseerr.wuzicangjie.com/
-              icon: /assets/icons/overseerr.svg
-            - title: Prowlarr
-              url: https://prowlarr.wuzicangjie.com/
-              icon: /assets/icons/prowlarr.svg
-            - title: qBittorrent
-              url: https://qbittorrent.wuzicangjie.com/
-              icon: /assets/icons/qbittorrent.svg
-            - title: Radarr
-              url: https://radarr.wuzicangjie.com/
-              icon: /assets/icons/radarr.svg
-            - title: Sonarr
-              url: https://sonarr.wuzicangjie.com/
-              icon: /assets/icons/sonarr.svg
-            - title: Browserless
-              url: http://192.168.0.21:3012/
-              icon: /assets/icons/browserless.svg
             - title: ConvertX
               url: https://convert.wuzicangjie.com/
               icon: /assets/icons/convertx.svg
@@ -106,6 +88,9 @@
             - title: Open WebUI
               url: https://openwebui.wuzicangjie.com/
               icon: /assets/icons/open-webui.svg
+            - title: Overseerr
+              url: https://overseerr.wuzicangjie.com/
+              icon: /assets/icons/overseerr.svg
             - title: PicoShare
               url: https://share.wuzicangjie.com/
               icon: /assets/icons/picoshare.svg
@@ -115,9 +100,21 @@
             - title: Portainer
               url: https://portainer.wuzicangjie.com/
               icon: /assets/icons/portainer.svg
+            - title: Prowlarr
+              url: https://prowlarr.wuzicangjie.com/
+              icon: /assets/icons/prowlarr.svg
+            - title: qBittorrent
+              url: https://qbittorrent.wuzicangjie.com/
+              icon: /assets/icons/qbittorrent.svg
+            - title: Radarr
+              url: https://radarr.wuzicangjie.com/
+              icon: /assets/icons/radarr.svg
             - title: SearXNG
               url: https://search.wuzicangjie.com/
               icon: /assets/icons/searxng.svg
+            - title: Sonarr
+              url: https://sonarr.wuzicangjie.com/
+              icon: /assets/icons/sonarr.svg
             - title: Uptime Kuma
               url: https://uptime.wuzicangjie.com/
               icon: /assets/icons/uptime-kuma.svg
