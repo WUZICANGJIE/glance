@@ -2,22 +2,21 @@
   desktop-navigation-width: wide
   show-mobile-header: true
   width: wide
-
-  head-widgets:
-    - type: server-stats
-      servers:
-        - type: local
-          name: My VPS
-          hide-swap: true
-          hide-mountpoints-by-default: true
-          mountpoints:
-            "/mnt/root/":
-              name: Root
-              hide: false
-
+  
   columns:
-    - size: full
+    - size: small
       widgets:
+        - type: server-stats
+          servers:
+            - type: local
+              name: My VPS
+              hide-swap: true
+              hide-mountpoints-by-default: true
+              mountpoints:
+                "/mnt/root/":
+                  name: Root
+                  hide: false
+
         - type: bookmarks
           groups:
             - title: Server Management
@@ -46,7 +45,82 @@
                   url: http://192.168.0.1/
                 - title: UNRAID WebUI
                   url: http://192.168.0.21/      
-
+  
+    - size: full
+      widgets:
+        - type: monitor
+          cache: 1m
+          title: Internet Access
+          sites:
+            - title: Archivebox
+              url: https://archivebox.wuzicangjie.com/
+              icon: /assets/icons/archivebox.svg
+            - title: AutoBangumi
+              url: https://autobangumi.wuzicangjie.com/
+              icon: /assets/icons/autobangumi.svg
+            - title: Bazarr
+              url: https://bazarr.wuzicangjie.com/
+              icon: /assets/icons/bazarr.svg
+            - title: Overseerr
+              url: https://overseerr.wuzicangjie.com/
+              icon: /assets/icons/overseerr.svg
+            - title: Prowlarr
+              url: https://prowlarr.wuzicangjie.com/
+              icon: /assets/icons/prowlarr.svg
+            - title: qBittorrent
+              url: https://qbittorrent.wuzicangjie.com/
+              icon: /assets/icons/qbittorrent.svg
+            - title: Radarr
+              url: https://radarr.wuzicangjie.com/
+              icon: /assets/icons/radarr.svg
+            - title: Sonarr
+              url: https://sonarr.wuzicangjie.com/
+              icon: /assets/icons/sonarr.svg
+            - title: Browserless
+              url: http://192.168.0.21:3012/
+              icon: /assets/icons/browserless.svg
+            - title: ConvertX
+              url: https://convert.wuzicangjie.com/
+              icon: /assets/icons/convertx.svg
+            - title: FileBrowser
+              url: https://files.wuzicangjie.com/
+              icon: /assets/icons/filebrowser.svg
+            - title: FreshRSS
+              url: https://freshrss.wuzicangjie.com/
+              icon: /assets/icons/freshrss.svg
+            - title: Ghostfolio
+              url: https://ghostfolio.wuzicangjie.com/
+              icon: /assets/icons/ghostfolio.svg
+            - title: Karakeep
+              url: https://keep.wuzicangjie.com/
+              icon: /assets/icons/karakeep.svg
+            - title: Komga
+              url: https://komga.wuzicangjie.com/
+              icon: /assets/icons/komga.svg
+            - title: Lobe Chat
+              url: https://chat.wuzicangjie.com/
+              icon: /assets/icons/lobe-chat.svg
+            - title: Memos
+              url: https://memos.wuzicangjie.com/
+              icon: /assets/icons/memos.svg
+            - title: Open WebUI
+              url: https://openwebui.wuzicangjie.com/
+              icon: /assets/icons/open-webui.svg
+            - title: PicoShare
+              url: https://share.wuzicangjie.com/
+              icon: /assets/icons/picoshare.svg
+            - title: Plex
+              url: https://app.plex.tv/
+              icon: /assets/icons/plex.svg
+            - title: Portainer
+              url: https://portainer.wuzicangjie.com/
+              icon: /assets/icons/portainer.svg
+            - title: SearXNG
+              url: https://search.wuzicangjie.com/
+              icon: /assets/icons/searxng.svg
+            - title: Uptime Kuma
+              url: https://uptime.wuzicangjie.com/
+              icon: /assets/icons/uptime-kuma.svg
 
 
 
