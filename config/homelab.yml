@@ -30,8 +30,8 @@
                   url: https://cloud.linode.com/
                 - title: Tailscale Admin Console
                   url: https://login.tailscale.com/admin/machines
-                - title: Cloudflare One
-                  url: https://one.dash.cloudflare.com/
+                - title: Cloudflare Dashboard
+                  url: https://dash.cloudflare.com/
                 - title: Google Search Console
                   url: https://search.google.com/search-console/
                 - title: Bing Webmaster Tools
@@ -50,7 +50,7 @@
       widgets:
         - type: monitor
           cache: 1m
-          title: Internet Access
+          title: Docker Containers
           sites:
             - title: Archivebox
               url: https://archivebox.wuzicangjie.com/
