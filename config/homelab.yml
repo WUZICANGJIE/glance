@@ -4,7 +4,7 @@
   width: wide
 
   columns:
-    - size: small
+    - size: full
       widgets:
         - type: server-stats
           servers:
