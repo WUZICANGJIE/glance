@@ -11,7 +11,7 @@
       placeholder: "Ciallo ～(∠・ω< )⌒★!"
       bangs:
         - title: Amazon Japan
-          shortcut: "amazon"
+          shortcut: "a"
           url: https://www.amazon.co.jp/s?k={QUERY}
         - title: ArchWiki
           shortcut: "arch"
@@ -28,9 +28,6 @@
         - title: Bilibili Live
           shortcut: "blive"
           url: https://search.bilibili.com/live?keyword={QUERY}
-        - title: Bookmarks
-          shortcut: "b"
-          url: https://keep.wuzicangjie.com/dashboard/search?q={QUERY}
         - title: Cheat.sh
           shortcut: "sh"
           url: https://cheat.sh/{QUERY}
@@ -38,7 +35,7 @@
           shortcut: "ebay"
           url: https://www.ebay.com/sch/i.html?_nkw={QUERY}
         - title: GitHub
-          shortcut: "github"
+          shortcut: "gh"
           url: https://github.com/search?q={QUERY}
         - title: Google Map
           shortcut: "map"
