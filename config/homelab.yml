@@ -7,7 +7,7 @@
     - type: server-stats
       servers:
         - type: local
-          name: My Home Server
+          name: My VPS
           hide-swap: true
           hide-mountpoints-by-default: true
           mountpoints:
@@ -33,6 +33,10 @@
                   url: https://login.tailscale.com/admin/machines
                 - title: Cloudflare One
                   url: https://one.dash.cloudflare.com/
+                - title: Google Search Console
+                  url: https://search.google.com/search-console/
+                - title: Bing Webmaster Tools
+                  url: https://www.bing.com/webmasters/
             - title: Local Access
               hide-arrow: true
               links:
