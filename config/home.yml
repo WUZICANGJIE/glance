@@ -11,52 +11,52 @@
       placeholder: "Ciallo ～(∠・ω< )⌒★!"
       bangs:
         - title: Amazon Japan
-          shortcut: "!amazon"
+          shortcut: "amazon"
           url: https://www.amazon.co.jp/s?k={QUERY}
         - title: ArchWiki
-          shortcut: "!arch"
+          shortcut: "arch"
           url: https://wiki.archlinux.org/index.php?search={QUERY}
         - title: Baidu
-          shortcut: "!baidu"
+          shortcut: "baidu"
           url: https://www.baidu.com/s?wd={QUERY}
         - title: Bangumi
-          shortcut: "!bangumi"
+          shortcut: "bangumi"
           url: https://bangumi.tv/subject_search/{QUERY}
         - title: Bilibili
-          shortcut: "!bili"
+          shortcut: "bili"
           url: https://search.bilibili.com/all?keyword={QUERY}
         - title: Bilibili Live
-          shortcut: "!blive"
+          shortcut: "blive"
           url: https://search.bilibili.com/live?keyword={QUERY}
         - title: Bookmarks
-          shortcut: "!b"
+          shortcut: "b"
           url: https://keep.wuzicangjie.com/dashboard/search?q={QUERY}
         - title: Cheat.sh
-          shortcut: "!sh"
+          shortcut: "sh"
           url: https://cheat.sh/{QUERY}
         - title: eBay
-          shortcut: "!ebay"
+          shortcut: "ebay"
           url: https://www.ebay.com/sch/i.html?_nkw={QUERY}
         - title: GitHub
-          shortcut: "!github"
+          shortcut: "github"
           url: https://github.com/search?q={QUERY}
         - title: Google Map
-          shortcut: "!map"
+          shortcut: "map"
           url: https://www.google.com/maps/search/{QUERY}
         - title: Google Scholar
-          shortcut: "!scholar"
+          shortcut: "scholar"
           url: https://scholar.google.com/scholar?q={QUERY}
         - title: Kakaku.com
-          shortcut: "!kakaku"
+          shortcut: "kakaku"
           url: https://kakaku.com/search_results/{QUERY}/
         - title: Reddit
-          shortcut: "!r"
+          shortcut: "r"
           url: https://www.reddit.com/search?q={QUERY}
         - title: X
-          shortcut: "!x"
+          shortcut: "x"
           url: https://x.com/search?q={QUERY}
         - title: YouTube
-          shortcut: "!y"
+          shortcut: "y"
           url: https://www.youtube.com/results?search_query={QUERY}
 
   columns:
