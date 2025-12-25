@@ -194,25 +194,6 @@
             - UCilwQlk62k1z7aUEZPOB6yw # 小Lin说
             - UCDXTQ8nWmx_EhZ2v-kp7QxA # Ben Felix
             - UCeTLfPD7thTMabtL7w87Aug # 清流君
-
-        - type: group
-          define: &shared-reddit-properties
-            type: reddit
-            sort-by: top
-            show-flairs: true
-            top-period: week
-            show-thumbnails: true
-            collapse-after: 5
-            limit: 10
-          widgets:
-            - subreddit: CryptoCurrency
-              <<: *shared-reddit-properties
-            - subreddit: LETFs
-              <<: *shared-reddit-properties
-            - subreddit: wallstreetbets
-              <<: *shared-reddit-properties
-            - subreddit: algotrading
-              <<: *shared-reddit-properties
           
 
 

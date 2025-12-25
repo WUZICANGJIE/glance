@@ -6,14 +6,13 @@ branding:
   hide-footer: true
   custom-footer: |
     <p>無字倉頡のホームページ Powered by <a href="https://github.com/glanceapp/glance">Glance</a></p>
-  logo-url: /assets/logo.png
+  logo-url: /assets/logo.webp
   favicon-url: /assets/favicon.png
   app-name: "WUZI Dashboard"
   app-icon-url: /assets/app-icon.png
   app-background-color: "#2e2e2e"
 
 theme:
-  custom-css-file: /assets/my-style.css
   # background-color: 240 8 9
   # primary-color: 43 50 70
   # positive-color: 43 50 70
@@ -22,18 +21,10 @@ theme:
   # text-saturation-multiplier: 1
   disable-picker: true
 
-document:
-  head: |
-    <script src="/assets/js/live2d/autoload.js"></script>
-
 pages:
   - $include: home.yml
-  - $include: rss.yml
-  - $include: keep.yml
   - $include: market.yml
-  - $include: news.yml
   - $include: homelab.yml
-  - $include: portainer.yml
 
 auth:
   secret-key: ${GLANCE_SECRET_KEY}
