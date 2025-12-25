@@ -3,20 +3,21 @@
   show-mobile-header: true
   width: wide
 
+  head-widgets:
+    - type: server-stats
+      servers:
+        - type: local
+          name: My Home Server
+          hide-swap: true
+          hide-mountpoints-by-default: true
+          mountpoints:
+            "/mnt/root/":
+              name: Root
+              hide: false
+
   columns:
     - size: full
       widgets:
-        - type: server-stats
-          servers:
-            - type: local
-              name: My Home Server
-              hide-swap: true
-              hide-mountpoints-by-default: true
-              mountpoints:
-                "/mnt/root/":
-                  name: Root
-                  hide: false
-
         - type: bookmarks
           groups:
             - title: Server Management
