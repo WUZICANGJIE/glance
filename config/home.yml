@@ -195,6 +195,8 @@
               same-tab: true
               <<: *shared-bookmark-properties
               links:
+                - title: Gmail
+                  url: https://mail.google.com/
                 - title: GitHub
                   url: https://github.com/
                 - title: monkeytype
@@ -219,6 +221,8 @@
                   url: https://x.com/
                 - title: Chiphell
                   url: https://www.chiphell.com/
+                - title: Stage1
+                  url: https://stage1st.com/2b/
                 - title: V2EX
                   url: https://v2ex.com/
             - title: School
