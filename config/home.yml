@@ -246,18 +246,14 @@
             - title: AI
               <<: *shared-bookmark-properties
               links:
+                - title: ChatGPT
+                  url: https://chatgpt.com/
                 - title: Gemini
                   url: https://gemini.google.com/app
                 - title: NotebookLM
                   url: https://notebooklm.google.com/
                 - title: Manus
                   url: https://manus.im/app
-                - title: Ollama
-                  url: https://ollama.com/library/
-                - title: CIVITAI
-                  url: https://civitai.com/models
-                - title: Hugging Face
-                  url: https://huggingface.co/
                 - title: LMArena
                   url: https://lmarena.ai/leaderboard
 
