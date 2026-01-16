@@ -197,6 +197,8 @@
               links:
                 - title: Gmail
                   url: https://mail.google.com/
+                - title: FreshRSS
+                  url: https://rss.wuzicangjie.com/
                 - title: GitHub
                   url: https://github.com/
                 - title: monkeytype

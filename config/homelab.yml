@@ -68,7 +68,7 @@
               url: https://files.wuzicangjie.com/
               icon: /assets/icons/filebrowser.svg
             - title: FreshRSS
-              url: https://freshrss.wuzicangjie.com/
+              url: https://rss.wuzicangjie.com/
               icon: /assets/icons/freshrss.svg
             - title: Ghostfolio
               url: https://ghostfolio.wuzicangjie.com/

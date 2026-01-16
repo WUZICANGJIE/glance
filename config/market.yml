@@ -180,6 +180,8 @@
               links:
                 - title: Portfolio Visualizer
                   url: https://www.portfoliovisualizer.com/
+                - title: Asset Allocation Interactive
+                  url: https://interactive.researchaffiliates.com/
             - title: Community
               <<: *shared-bookmark-properties
               links:
