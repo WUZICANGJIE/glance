@@ -197,7 +197,7 @@
               links:
                 - title: Gmail
                   url: https://mail.google.com/
-                - title: FreshRSS
+                - title: Miniflux
                   url: https://rss.wuzicangjie.com/
                 - title: GitHub
                   url: https://github.com/
