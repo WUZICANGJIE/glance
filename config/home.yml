@@ -197,8 +197,8 @@
               links:
                 - title: Gmail
                   url: https://mail.google.com/
-                - title: Miniflux
-                  url: https://rss.wuzicangjie.com/
+                - title: ReactFlux
+                  url: https://feed.wuzicangjie.com/
                 - title: GitHub
                   url: https://github.com/
                 - title: monkeytype
