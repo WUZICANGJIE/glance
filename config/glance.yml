@@ -24,6 +24,7 @@ theme:
 pages:
   - $include: home.yml
   - $include: market.yml
+  - $include: news.yml
   - $include: homelab.yml
 
 auth:

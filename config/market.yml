@@ -172,7 +172,7 @@
               <<: *shared-bookmark-properties
               links:
                 - title: Shen
-                  url: https://www.shenmacro.com/
+                  url: https://note.com/shennote
                 - title: Physixfan
                   url: https://www.physixfan.com/
             - title: Tools

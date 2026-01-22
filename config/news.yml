@@ -1,0 +1,38 @@
+- name: News
+  desktop-navigation-width: wide
+  show-mobile-header: true
+  width: wide
+
+  columns:
+    - size: full
+      widgets:
+        - type: custom-api
+          title: Miniflux
+          cache: 5m
+          url: ${MINIFLUX_API_URL}/v1/entries
+          headers:
+            X-Auth-Token: ${MINIFLUX_TOKEN}
+          parameters:
+            status: unread
+            order: published_at
+            direction: desc
+            limit: 10
+          template: |
+            {{ $total := .JSON.Int "total" }}
+            {{ if eq $total 0 }}
+              <p class="color-subdue">There are no unread entries...</p>
+            {{ else }}
+              <ul class="list list-gap-10 list-with-separator collapsible-container" data-collapse-after="5">
+              {{ range .JSON.Array "entries" }}
+                <li>
+                  <a href="${MINIFLUX_LINKS_URL}/unread/entry/{{ .Int "id" }}" target="_blank">
+                    <p class="size-h4 color-highlight text-truncate">{{ .String "title" }}</p>
+                  </a>
+                  <ul class="list-horizontal-text size-h6">
+                    <li><span {{ .String "published_at" | parseRelativeTime "rfc3339" }}></span> ago</li>
+                    <li><a href="{{ .String "url" }}" target="_blank">{{ .String "feed.title" }}</a></li>
+                  </ul>
+                </li>
+              {{ end }}
+              </ul>
+            {{ end }}
