@@ -7,6 +7,10 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
 
+    networks:
+      - default
+      - ext_miniflux
+
     environment:
       TZ: Asia/Tokyo
       HOST_OS: Ubuntu
@@ -28,8 +32,17 @@ services:
       GLANCE_WUZI_PASSWORD: ${GLANCE_WUZI_PASSWORD}
       GLANCE_GUEST_PASSWORD: ${GLANCE_GUEST_PASSWORD}
 
+      MINIFLUX_API_URL: ${MINIFLUX_API_URL}
+      MINIFLUX_TOKEN: ${MINIFLUX_TOKEN}
+      MINIFLUX_LINKS_URL: ${MINIFLUX_LINKS_URL}
+
     volumes:
       - ./config:/app/config:rw
       - ./assets:/app/assets:rw
       - /var/run/docker.sock:/var/run/docker.sock:rw
       - /:/mnt/root/:ro
+
+networks:
+  ext_miniflux:
+    external: true
+    name: miniflux_default
