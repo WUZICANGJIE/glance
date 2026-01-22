@@ -1,4 +1,4 @@
-- name: News
+- name: RSS
   desktop-navigation-width: wide
   show-mobile-header: true
   width: wide
