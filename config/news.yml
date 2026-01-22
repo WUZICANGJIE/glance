@@ -16,13 +16,13 @@
             status: unread
             order: published_at
             direction: desc
-            limit: 25
+            limit: 50
           template: |
             {{ $total := .JSON.Int "total" }}
             {{ if eq $total 0 }}
               <p class="color-subdue">There are no unread entries...</p>
             {{ else }}
-              <ul class="list list-gap-10 list-with-separator collapsible-container" data-collapse-after="10">
+              <ul class="list list-gap-10 list-with-separator collapsible-container" data-collapse-after="15">
               {{ range .JSON.Array "entries" }}
                 <li>
                   <a href="${MINIFLUX_LINKS_URL}/article/{{ .Int "id" }}" target="_blank">
