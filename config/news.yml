@@ -16,7 +16,7 @@
             status: unread
             order: published_at
             direction: desc
-            limit: 10
+            limit: 20
           template: |
             {{ $total := .JSON.Int "total" }}
             {{ if eq $total 0 }}
