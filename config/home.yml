@@ -37,6 +37,9 @@
         - title: GitHub
           shortcut: "gh"
           url: https://github.com/search?q={QUERY}
+        - title: Gmail
+          shortcut: "mail"
+          url: https://mail.google.com/mail/u/0/#search/{QUERY}
         - title: Google Map
           shortcut: "map"
           url: https://www.google.com/maps/search/{QUERY}
