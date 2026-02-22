@@ -69,13 +69,11 @@
               label: Tokyo
             - timezone: Asia/Shanghai
               label: Beijing
-            - timezone: Europe/Amsterdam
-              label: Amsterdam
             - timezone: America/New_York
               label: New York
 
         - type: weather
-          location: Amstelveen, The Netherlands # Tokyo, Japan
+          location: Tokyo, Japan
           units: metric
           hour-format: 24h
 
@@ -237,10 +235,12 @@
                   url: https://wsdmoodle.waseda.jp/
                 - title: My Waseda
                   url: https://my.waseda.jp/
-                - title: VU Canvas
-                  url: https://canvas.vu.nl/
-                - title: VU Dashboard
-                  url: https://vu.nl/en/dashboard
+                - title: Kyoto University Portal
+                  url: https://student.iimc.kyoto-u.ac.jp/list.html
+                # - title: VU Canvas
+                #   url: https://canvas.vu.nl/
+                # - title: VU Dashboard
+                #   url: https://vu.nl/en/dashboard
             - title: Shopping
               <<: *shared-bookmark-properties
               links:
@@ -261,6 +261,8 @@
                   url: https://gemini.google.com/app
                 - title: NotebookLM
                   url: https://notebooklm.google.com/
+                - title: Claude
+                  url: https://claude.ai/
                 - title: Manus
                   url: https://manus.im/app
                 - title: LMArena
