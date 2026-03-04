@@ -73,7 +73,7 @@
               label: New York
 
         - type: weather
-          location: Tokyo, Japan
+          location: Kyoto, Japan
           units: metric
           hour-format: 24h
 
