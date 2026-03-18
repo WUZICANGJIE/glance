@@ -40,11 +40,9 @@
               hide-arrow: true
               links:
                 - title: Archer BE9300
-                  url: http://192.168.0.3/
-                - title: Aterm
-                  url: http://192.168.0.1/
+                  url: http://tplinkwifi.local/
                 - title: UNRAID WebUI
-                  url: http://192.168.0.21/      
+                  url: http://192.168.128.3/      
   
     - size: full
       widgets:
