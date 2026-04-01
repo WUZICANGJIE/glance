@@ -231,16 +231,12 @@
             - title: School
               <<: *shared-bookmark-properties
               links:
-                - title: Waseda Moodle
-                  url: https://wsdmoodle.waseda.jp/
-                - title: My Waseda
-                  url: https://my.waseda.jp/
                 - title: Kyoto University Portal
                   url: https://student.iimc.kyoto-u.ac.jp/list.html
-                # - title: VU Canvas
-                #   url: https://canvas.vu.nl/
-                # - title: VU Dashboard
-                #   url: https://vu.nl/en/dashboard
+                - title: KULASIS
+                  url: https://www.k.kyoto-u.ac.jp/student/la/top
+                - title: MyKULINE
+                  url: https://kuline.kulib.kyoto-u.ac.jp/opac/opac_search/
             - title: Shopping
               <<: *shared-bookmark-properties
               links:
