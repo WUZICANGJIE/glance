@@ -237,6 +237,8 @@
                   url: https://www.k.kyoto-u.ac.jp/student/la/top
                 - title: MyKULINE
                   url: https://kuline.kulib.kyoto-u.ac.jp/opac/opac_search/
+                - title: Career Support Center
+                  url: https://www.career.gakusei.kyoto-u.ac.jp/
             - title: Shopping
               <<: *shared-bookmark-properties
               links:
