@@ -235,10 +235,14 @@
                   url: https://student.iimc.kyoto-u.ac.jp/list.html
                 - title: KULASIS
                   url: https://www.k.kyoto-u.ac.jp/student/la/top
+                - title: KULMS
+                  url: https://lms.gakusei.kyoto-u.ac.jp/portal
                 - title: MyKULINE
                   url: https://kuline.kulib.kyoto-u.ac.jp/opac/opac_search/
                 - title: Career Support Center
                   url: https://www.career.gakusei.kyoto-u.ac.jp/
+                - title: eAPRIN
+                  url: https://edu.aprin.or.jp/my/
             - title: Shopping
               <<: *shared-bookmark-properties
               links:
